@@ -1,0 +1,42 @@
+import express from "express";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import bodyParser from 'body-parser';
+import pg from "pg";
+
+const db = new pg.Client({
+    user: "postgres",
+    host: "localhost",
+    database: "world",
+    password: "12345678",
+    port: 5432,
+});
+
+db.connect();
+
+const app = express();
+const port = 3000;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+    res.render("index.ejs");
+});
+
+
+app.listen(port, () => {
+    console.log(`server is running on port ${port}`);
+});
+
+----------
+npm init
+npm i express pg body-parser ejs
+----------
+zet type: module in bestand package.json
+----------
+
+>> connectie met database world
+>> herkent ejs file en opent blad index.ejs bij connectie met server 

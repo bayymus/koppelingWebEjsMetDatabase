@@ -1,0 +1,11 @@
+complete connectie maken 
+    - express   
+    - body-parser
+    - ejs 
+    - pg
+    - index.ejs pagina tonen met GET route
+
+ zie hiervoor naar howTo1.txt
+
+
+connectie database met post
