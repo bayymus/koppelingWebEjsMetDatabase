@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    
+        th {
+            background-color: #eee;
+        }
+    
+        input {
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <form action="/" method="POST">
+        <label for="fietsID">Geef fiets id in </label>
+        <input type="text" placeholder="geef fiets ID in" name="fietsID">
+        <label for="gebruiker">Geef de gebruiker in</label>
+        <input type="text" name="gebruiker">
+
+        <input type="submit" value="HaalOp">
+    </form> -->
+
+    <form action="/Wijzig" method="POST">
+
+        <p>Zoeken op:</p>
+
+        <label>
+            <input type="radio" name="zoektype" value="fietsId" required>
+            Fiets ID
+        </label>
+
+        <label>
+            <input type="radio" name="zoektype" value="gebruiker">
+            Gebruikersnaam
+        </label>
+
+        <br><br>
+
+        <input type="text" name="zoekwaarde" placeholder="Vul hier ID of gebruikersnaam in" required>
+
+        <button type="submit">Wijzigen</button>
+    </form>
+
+    
+
+<% if (fietsen && fietsen.length> 0) { %>
+    <h2>Volgende matches gevonden:</h2>
+
+
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>Gebruiker</th>
+            <th>Datum Gekeurd</th>
+            <th>Keuring Vervaldatum</th>
+        </tr>
+        <% for (let i=0; i < fietsen.length; i++) { %>
+            <tr>
+                <td>
+                    <%= fietsen[i].fietsid %>
+                </td>
+                <td>
+                    <%= fietsen[i].naam %>
+                </td>
+                <td>
+                    <%= fietsen[i].gebruiker %>
+                </td>
+                <td>
+                    <%= fietsen[i].datumgekeurd %>
+                </td>
+                <td>
+                    <%= fietsen[i].keuringvervaldatum %>
+                </td>
+            </tr>
+            <% } %>
+
+    </table>
+    <% } else { %>
+        <p>Geen data beschikbaar of database niet bereikbaar.</p>
+        <% } %>
+
+
+
+</body>
+
+</html>
