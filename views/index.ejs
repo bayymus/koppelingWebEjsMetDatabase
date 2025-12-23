@@ -33,13 +33,14 @@
         <label for="fietsID">ID fiets </label>
         <input type="text" placeholder="geef fiets ID in" name="fietsID" required>
         <label for="naam">Naam</label>
-        <input type="text" name="naam" required>
+        <input type="text" name="naam" value="FIETS" readonly required>
         <label for="gebruiker">Gebruiker</label>
         <input type="text" name="gebruiker" required>
         <label for="datumGekeurd">Datum Keuring</label>
-        <input type="date" name="datumGekeurd" placeholder="vul formaat dd/mm/jaar in">
-        <label for="keuringVervalDatum">Keuring Vervaldatum</label>
-        <input type="date" name="keuringVervalDatum" placeholder="vul formaat dd/mm/jaar in">
+        <input type="date" name="datumGekeurd" id="datumGekeurd" placeholder="vul formaat dd/mm/jaar in"
+            onchange="berekenVervalDatum()">
+        <label for="keuringVervalDatum" hidden>Keuring Vervaldatum</label>
+        <input type="hidden" name="keuringVervalDatum" id="keuringVervalDatum">
 
         <input type="submit" value="Verzenden">
     </form>
@@ -81,7 +82,19 @@
             <p>Geen data beschikbaar of database niet bereikbaar.</p>
             <% } %>
 
+                <script>
+                    function berekenVervalDatum() {
+                        const datumInput = document.getElementById('datumGekeurd');
+                        const vervalInput = document.getElementById('keuringVervalDatum');
 
+                        if (!datumInput.value) return;
+
+                        const datum = new Date(datumInput.value);
+                        datum.setFullYear(datum.getFullYear() + 1);
+
+                        vervalInput.value = datum.toISOString().split('T')[0];
+                    }
+                </script>
 </body>
 
 </html>
